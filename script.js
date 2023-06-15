@@ -1,26 +1,29 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var numbericChar = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",];
-var specialChar = ["!", "@", "#", "$", "%", "^", "&", "*", "+", "-", "/", ";", ":", "<", ">", "?", "_", "~"];
 var lowerCaseChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", ];
 var upperCaseChar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ];
+var numbericChar = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",];
+var specialChar = ["!", "@", "#", "$", "%", "^", "&", "*", "+", "-", "/", ";", ":", "<", ">", "?", "_", "~"];
 
 var confirmLength = "";
-var confirmNumericChar;
-var confirmSpecialChar;
 var confirmLowerCaseChar;
 var confirmUpperCaseChar;
+var confirmNumericChar;
+var confirmSpecialChar;
 
 function generatePassword() {
-  var confirmLength = window.prompt("Please input length of desired password");
+  confirmLength = window.prompt("Please input length of desired password", "12");
 
   while(confirmLength < 8) {
     window.alert("Password length must be 8 characters or more");
-    var confirmLength = window.prompt("Please input length of desired password:");
-  } while(confirmLength >=129) {
+    generatePassword();
+    return;
+  } 
+  while(confirmLength >=129) {
     window.alert("Password length must be 128 characters or less");
-    var confirmLength = window.prompt("Please input length of desired password:");
+    generatePassword();
+    return;
   }
   
   confirmLowerCaseChar = window.confirm("Click OK if you would like to include lowercase characters");
@@ -36,7 +39,28 @@ function generatePassword() {
     confirmSpecialChar = window.confirm("Click OK if you would like to include special characters");
   }
 
+  var passwordChar = [];
 
+  if (confirmLowerCaseChar) {
+    passwordChar = passwordChar.concat(lowerCaseChar);
+  }
+  if (confirmUpperCaseChar) {
+    passwordChar = passwordChar.concat(upperCaseChar);
+  }
+  if (confirmNumericChar) {
+    passwordChar = passwordChar.concat(numbericChar);
+  }
+  if (confirmSpecialChar) {
+    passwordChar = passwordChar.concat(specialChar);
+  }
+
+  var finalPassword = "";
+
+  for (var i = 0; i < confirmLength; i++) {
+    finalPassword = finalPassword + passwordChar[Math.floor(Math.random() * passwordChar.length)];
+  }
+   
+  return finalPassword;
 }
 
 // Write password to the #password input
