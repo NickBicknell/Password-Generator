@@ -25,6 +25,8 @@ function generatePassword() {
     generatePassword();
     return;
   }
+
+  window.alert("Your password will be " + confirmLength + " characters long");
   
   confirmLowerCaseChar = window.confirm("Click OK if you would like to include lowercase characters");
   confirmUpperCaseChar = window.confirm("Click OK if you would like to include uppercase characters");
@@ -38,6 +40,31 @@ function generatePassword() {
     confirmNumericChar = window.confirm("Click OK if you would like to include numeric characters");
     confirmSpecialChar = window.confirm("Click OK if you would like to include special characters");
   }
+
+  var charConfirmation = "";
+
+  if (confirmLowerCaseChar) {
+    charConfirmation += "Your password will have lowercase characters\n"; 
+  } else {
+    charConfirmation += "Your password will not have lowercase characters\n"
+  }
+  if (confirmUpperCaseChar) {
+    charConfirmation += "Your password will have uppercase characters\n"; 
+  } else {
+    charConfirmation += "Your password will not have uppercase characters\n"
+  }
+  if (confirmNumericChar) {
+    charConfirmation += "Your password will have numeric characters\n"; 
+  } else {
+    charConfirmation += "Your password will not have numeric characters\n"
+  }
+  if (confirmSpecialChar) {
+    charConfirmation += "Your password will have special characters\n"; 
+  } else {
+    charConfirmation += "Your password will not have special characters\n"
+  }
+
+  window.alert(charConfirmation);
 
   var passwordChar = [];
 
